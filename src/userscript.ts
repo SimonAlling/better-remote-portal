@@ -1,11 +1,9 @@
 export default {
-    id: "bootstrapped-userscript",
-    name: "Bootstrapped Userscript",
-    version: "0.1.0",
-    description: "A basic bootstrapped userscript.",
-    author: "John Smith",
-    hostname: "example.com",
-    sitename: "Example.com",
-    namespace: "mywebsite.example",
+    id: "better-remote-portal",
+    name: "Better Remote Portal",
+    version: "1.0.0",
+    description: "Improvements for Remote Portal.",
+    author: "Simon Alling",
+    sitename: "Remote Portal",
     runAt: "document-start",
 } as const;

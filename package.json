@@ -4,7 +4,8 @@
     "build-webpack-config": "tsc -p tsconfig.webpack.json",
     "build-userscript": "webpack --config .userscripter-temp/webpack.config.js",
     "build": "npm run clean && npm run build-webpack-config && npm run build-userscript && npm run clean",
-    "clean": "rm -rf .userscripter-temp"
+    "clean": "rm -rf .userscripter-temp",
+    "test": "jest"
   },
   "dependencies": {
     "@typed/compose": "^1.0.0",
@@ -16,5 +17,10 @@
     "userscripter": "^1.1.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.13",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.3.0"
   }
 }

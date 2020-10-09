@@ -1,4 +1,9 @@
-import { extractLink } from "./assemble-links";
+import { extractLink, hasHiddenTargetDomain } from "./assemble-links";
+
+it("recognizes when the target domain is hidden", () => {
+    expect(hasHiddenTargetDomain(`/foo/,DanaInfo=.abcdefghijkL1mn2o3456PQr.-,SSL+index.html?foo=bar`)).toBe(true);
+    expect(hasHiddenTargetDomain(`/foo/,DanaInfo=example.com,SSL+index.html?foo=bar`)).toBe(false);
+});
 
 it("works when there's no link to extract and assemble", () => {
     expect(extractLink(new Text(``))).toBe(null);

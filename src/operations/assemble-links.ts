@@ -1,3 +1,5 @@
+import { log } from "userscripter/lib";
+
 type TextNodeAndLink = {
     node: Text
     link: IndexedLink
@@ -11,6 +13,11 @@ type IndexedLink = {
 export default function(e: {
     body: HTMLElement,
 }) {
+    if (hasHiddenTargetDomain(e.body.ownerDocument.location.pathname)) {
+        // We don't return an error (string) because this is not something we can do anything about.
+        log.error(`I cannot assemble any link(s) because the target domain has been intentionally hidden.`);
+        return;
+    }
     const nodesWithMaybeLinks = getTextNodes(e.body).map(node => ({
         node,
         link: extractLink(node),
@@ -36,6 +43,11 @@ export default function(e: {
         actualLink.text = url;
         linkPart.replaceWith(actualLink);
     }
+}
+
+export function hasHiddenTargetDomain(pathname: string): boolean {
+    // Example URL with hidden target domain: https://portal.example.com/foo/,DanaInfo=.abcdefghijkL1mn2o3456PQr.-,SSL+index.html?foo=bar
+    return /\/,DanaInfo=\./.test(pathname);
 }
 
 export function extractLink(node: Text): IndexedLink | null {
